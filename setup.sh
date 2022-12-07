@@ -5,9 +5,39 @@ set -o xtrace
 sudo pacman -Syu
 
 # Install minimal desktop
-sudo pacman -Syu gnome-shell nautilus gnome-terminal gnome-control-center xdg-user-dirs gdm gnome-keyring xdg-desktop-portal xdg-desktop-portal-gnome
+sudo pacman -Syu                 \
+	gdm                      \
+	gnome-console            \
+	gnome-control-center     \
+	gnome-keyring            \
+	gnome-shell              \
+	gnome-text-editor        \
+	gnome-tweaks             \
+	nautilus                 \
+	nano                     \
+	nfs-utils                \
+	xdg-user-dirs            \
+	xdg-desktop-portal       \
+	xdg-desktop-portal-gnome \
+
+# Enable and start display manager
 sudo systemctl enable gdm
 sudo systemctl start gdm
+
+# Create standard user directories
+xdg-user-dirs-update
+
+# Create additional directories
+mkdir ./{Archive,Books,Projects,Unsorted,Roms}
+
+# Install yay
+# See: https://github.com/Jguer/yay#binary
+pacman -S --needed git base-devel
+git clone https://aur.archlinux.org/yay-bin.git
+pushd yay-bin
+makepkg -si
+popd
+rm -rf yay-bin
 
 # Generate development package database used for devel update.
 yay -Y --gendb
@@ -17,6 +47,11 @@ yay -Y --devel --combinedupgrade --batchinstall --save
 
 # Perform system upgrade, but also check for development package updates.
 yay -Syu --devel
+
+# Chrome & Gnome Browser Connector
+yay -Syu gnome-browser-connector google-chrome
+
+# Install Grand Theft Focus from https://extensions.gnome.org/extension/5410/grand-theft-focus/
 
 # Install packages.
 yay -Syu \
