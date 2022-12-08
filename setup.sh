@@ -53,6 +53,9 @@ yay -Syu gnome-browser-connector google-chrome
 
 # Install Grand Theft Focus from https://extensions.gnome.org/extension/5410/grand-theft-focus/
 
+# Remove bogus menu items
+yay -Syu menulibre
+
 # Install packages.
 yay -Syu \
   # Repo
