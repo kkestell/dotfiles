@@ -1,14 +1,6 @@
-# Debian 11
+# Arch
 
-```console
-$ su -
-# usermod -aG kyle sudo
-# reboot
-```
-
-```console
-$ sudo apt install nfs-common
-```
+## NFS Shares
 
 ```console
 $ sudo cat <<EOT >> /etc/fstab
@@ -30,13 +22,36 @@ $ mkdir -p ~/{Archive,Books,Unsorted,Projects,Roms}
 ```
 
 ```console
+$ sudo systemctl daemon-reload
 $ sudo mount -a
 ```
 
-## Flatpak
+## Package Management
+
+Clean unneeded dependencies.
+
+```
+yay -Yc
+```
+
+## Software
+
+### Gnome Browser Connector
 
 ```console
-$ sudo apt install flatpak gnome-software-plugin-flatpak
+yay -Syu gnome-browser-connector
+```
+
+### Gnome Shell Extensions
+
+* https://extensions.gnome.org/extension/2182/noannoyance/
+* https://extensions.gnome.org/extension/4269/alphabetical-app-grid/
+* 
+
+### Flatpak
+
+```console
+$ yay flatpak
 $ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 ```
 
@@ -51,7 +66,7 @@ $ flatpak install flathub io.bassi.Amberol
 ### Beets Music
 
 ```console
-$ sudo apt install beets
+$ yay -Syu python-requests beets
 ```
 
 ```console
@@ -68,6 +83,22 @@ EOF
 ```console
 $ beet ls
 ```
+
+### Nicotine+
+
+```console
+$ yay -Syu nicotine+
+```
+
+### Fonts
+
+```
+$ yay -Syu ttf-fira-code
+```
+
+### Amberol
+
+
 
 ### Calibre
 
@@ -110,28 +141,26 @@ $ sudo apt install ./docker-desktop.deb
 $ rm docker-desktop.deb
 ```
 
-### Git
-
-```console
-$ sudo apt install git
-```
-
 ### GitHub Desktop
 
-See: https://github.com/shiftkey/desktop
-
 ```console
-$ wget -qO - https://apt.packages.shiftkey.dev/gpg.key | gpg --dearmor | sudo tee /usr/share/keyrings/shiftkey-packages.gpg > /dev/null
-$ sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/shiftkey-packages.gpg] https://apt.packages.shiftkey.dev/ubuntu/ any main" > /etc/apt/sources.list.d/shiftkey-packages.list'
-$ sudo apt update && sudo apt install github-desktop
+$ yay github-desktop-bin
 ```
 
 ### Visual Studio Code
 
-See: https://code.visualstudio.com/docs/setup/linux
+```console
+$ yay visual-studio-code-bin
+```
+
+### Menu Editor
 
 ```console
-$ wget -O vscode.deb https://go.microsoft.com/fwlink/?LinkID=760868
-$ sudo apt install ./vscode.deb
-$ rm vscode.deb
+$ yay menulibre
+```
+
+### Telegram
+
+```console
+$ flatpak install flathub org.telegram.desktop
 ```
