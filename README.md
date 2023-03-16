@@ -30,8 +30,8 @@ $ sudo mount -a
 
 Clean unneeded dependencies.
 
-```
-yay -Yc
+```console
+$ yay -Yc
 ```
 
 ## Disable Tracker
