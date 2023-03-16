@@ -53,6 +53,31 @@ gtk-hint-font-metrics=1
 
 ## Software
 
+### Virtual Machines
+
+```console
+$ yay -Syu virt-manager qemu-desktop libvirt edk2-ovmf dnsmasq iptables-nft
+```
+
+```console
+$ sudo systemctl enable libvirtd.service
+$ sudo systemctl start libvirtd.service
+```
+
+```console
+$ sudo usermod -aG libvirt $(whoami)
+```
+
+```console
+$ sudo reboot
+```
+
+See:
+
+* https://wiki.archlinux.org/title/libvirt
+* https://wiki.archlinux.org/title/KVM
+* https://wiki.archlinux.org/title/QEMU
+
 ### Docker (Podman)
 
 ```console
@@ -62,14 +87,13 @@ $ yay -Syu podman-desktop
 ### Gnome Browser Connector
 
 ```console
-yay -Syu gnome-browser-connector
+$ yay -Syu gnome-browser-connector
 ```
 
 ### Gnome Shell Extensions
 
 * https://extensions.gnome.org/extension/2182/noannoyance/
 * https://extensions.gnome.org/extension/4269/alphabetical-app-grid/
-* 
 
 ### Flatpak
 
@@ -115,53 +139,20 @@ $ yay -Syu nicotine+
 
 ### Fonts
 
-```
+```console
 $ yay -Syu ttf-fira-code
 ```
 
 ### Amberol
 
-
+```console
+$ flatpak install flathub io.bassi.Amberol
+```
 
 ### Calibre
 
 ```console
 $ flatpak install flathub com.calibre_ebook.calibre
-```
-
-### Docker
-
-#### Engine
-
-See: https://docs.docker.com/engine/install/debian/
-
-```console
-$ sudo apt-get update
-$ sudo apt-get install ca-certificates curl gnupg lsb-release
-```
-
-```console
-$ sudo mkdir -m 0755 -p /etc/apt/keyrings
-$ curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-```
-
-```console
-$ echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-```
-
-```console
-$ sudo apt-get update
-$ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-```
-
-#### Desktop
-
-See: https://docs.docker.com/desktop/install/debian/
-
-```console
-$ wget -O docker-desktop.deb https://desktop.docker.com/linux/main/amd64/docker-desktop-4.17.0-amd64.deb
-$ sudo apt install ./docker-desktop.deb
-$ rm docker-desktop.deb
 ```
 
 ### GitHub Desktop
