@@ -1,9 +1,46 @@
 # Arch
 
-## NFS Shares
+## Fix Gnome Shell
+
+### Disable Tracker
 
 ```console
-$ sudo cat <<EOT >> /etc/fstab
+$ systemctl --user mask tracker-extract-3.service tracker-miner-fs-3.service tracker-miner-rss-3.service tracker-writeback-3.service tracker-xdg-portal-3.service tracker-miner-fs-control-3.service
+```
+
+```console
+$ tracker3 reset -s -r
+```
+
+```console
+$ sudo reboot
+```
+
+### Improve GTK4 font rendering
+
+Add the following to `~/.config/gtk-4.0/settings.ini`:
+
+```ini
+[Settings]
+gtk-hint-font-metrics=1
+```
+
+### Extensions
+
+Install Gnome Browser Connector first:
+
+```console
+$ yay -Syu gnome-browser-connector
+```
+
+Then install the following extensions:
+
+* https://extensions.gnome.org/extension/2182/noannoyance/
+* https://extensions.gnome.org/extension/4269/alphabetical-app-grid/
+
+## NFS Shares
+
+```text
 nas.lan:/Archive   /home/kyle/Archive   nfs defaults,timeo=900,retrans=5,_netdev 0 0
 nas.lan:/Books     /home/kyle/Books     nfs defaults,timeo=900,retrans=5,_netdev 0 0
 nas.lan:/Documents /home/kyle/Documents nfs defaults,timeo=900,retrans=5,_netdev 0 0
@@ -14,7 +51,6 @@ nas.lan:/Unsorted  /home/kyle/Unsorted  nfs defaults,timeo=900,retrans=5,_netdev
 nas.lan:/Photos    /home/kyle/Pictures  nfs defaults,timeo=900,retrans=5,_netdev 0 0
 nas.lan:/Projects  /home/kyle/Projects  nfs defaults,timeo=900,retrans=5,_netdev 0 0
 nas.lan:/Roms      /home/kyle/Roms      nfs defaults,timeo=900,retrans=5,_netdev 0 0
-EOT
 ```
 
 ```console
@@ -23,35 +59,39 @@ $ mkdir -p ~/{Archive,Books,Unsorted,Projects,Roms}
 
 ```console
 $ sudo systemctl daemon-reload
+```
+
+```console
 $ sudo mount -a
 ```
 
-## Package Management
+## Software
 
-Clean unneeded dependencies.
+### Flatpak
 
 ```console
-$ yay -Yc
+$ yay flatpak
 ```
 
-## Disable Tracker
+```console
+$ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+```
+
+### Docker
 
 ```console
-$ systemctl --user mask tracker-extract-3.service tracker-miner-fs-3.service tracker-miner-rss-3.service tracker-writeback-3.service tracker-xdg-portal-3.service tracker-miner-fs-control-3.service
-$ tracker3 reset -s -r
+$ yay -Syu docker docker-compose
+```
+
+```console
+$ sudo systemctl enable docker
+$ sudo systemctl start docker
+```
+
+```console
+$ sudo usermod -aG docker $(whoami)
 $ sudo reboot
 ```
-
-## Improve GTK4 font rendering
-
-Add the following to `~/.config/gtk-4.0/settings.ini`
-
-```ini
-[Settings]
-gtk-hint-font-metrics=1
-```
-
-## Software
 
 ### Virtual Machines
 
@@ -69,6 +109,10 @@ $ sudo usermod -aG libvirt $(whoami)
 ```
 
 ```console
+$ sudo virsh net-start default
+```
+
+```console
 $ sudo reboot
 ```
 
@@ -77,32 +121,6 @@ See:
 * https://wiki.archlinux.org/title/libvirt
 * https://wiki.archlinux.org/title/KVM
 * https://wiki.archlinux.org/title/QEMU
-
-### Docker (Podman)
-
-```console
-$ yay -Syu podman-desktop
-```
-
-### Gnome Browser Connector
-
-```console
-$ yay -Syu gnome-browser-connector
-```
-
-### Gnome Shell Extensions
-
-* https://extensions.gnome.org/extension/2182/noannoyance/
-* https://extensions.gnome.org/extension/4269/alphabetical-app-grid/
-
-### Flatpak
-
-```console
-$ yay flatpak
-$ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-```
-
-## Software
 
 ### Amberol
 
@@ -118,13 +136,16 @@ $ yay -Syu python-requests beets
 
 ```console
 $ mkdir -p ~/.config/beets
-$ cat > ~/.config/beets/config.yaml << EOF
+```
+
+`~/.config/beets/config.yaml`:
+
+```yaml
 directory: ~/Music
 library: ~/Music/musiclibrary.db
 plugins: fetchart
 fetchart:
     auto: yes
-EOF
 ```
 
 ```console
