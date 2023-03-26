@@ -30,7 +30,7 @@ gtk-hint-font-metrics=1
 Install Gnome Browser Connector first:
 
 ```console
-$ yay -Syu gnome-browser-connector
+$ yay -Sy gnome-browser-connector
 ```
 
 Then install the following extensions:
@@ -65,6 +65,20 @@ $ sudo systemctl daemon-reload
 $ sudo mount -a
 ```
 
+## Printing
+
+Brother HL-L2340D
+
+```console
+$ yay -Sy cups cups-pdf brlaser
+```
+
+```console
+$ sudo systemctl enable cups.socket
+$ sudo systemctl enable cups.service
+$ sudo systemctl start cups.socket
+```
+
 ## Software
 
 ### Flatpak
@@ -80,7 +94,7 @@ $ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.fl
 ### Docker
 
 ```console
-$ yay -Syu docker docker-compose
+$ yay -Sy docker docker-compose
 ```
 
 ```console
@@ -96,7 +110,7 @@ $ sudo reboot
 ### Virtual Machines
 
 ```console
-$ yay -Syu virt-manager qemu-desktop libvirt edk2-ovmf dnsmasq iptables-nft
+$ yay -Sy virt-manager qemu-desktop libvirt edk2-ovmf dnsmasq iptables-nft
 ```
 
 ```console
@@ -131,7 +145,7 @@ $ flatpak install flathub io.bassi.Amberol
 ### Beets Music
 
 ```console
-$ yay -Syu python-requests beets
+$ yay -Sy python-requests beets
 ```
 
 ```console
@@ -155,13 +169,13 @@ $ beet ls
 ### Nicotine+
 
 ```console
-$ yay -Syu nicotine+
+$ yay -Sy nicotine+
 ```
 
 ### Fonts
 
 ```console
-$ yay -Syu ttf-fira-code
+$ yay -Sy ttf-fira-code
 ```
 
 ### Amberol
