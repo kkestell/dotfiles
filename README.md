@@ -136,11 +136,21 @@ See:
 * https://wiki.archlinux.org/title/KVM
 * https://wiki.archlinux.org/title/QEMU
 
-### Amberol
+### Pandoc
 
 ```console
-$ flatpak install flathub io.bassi.Amberol
+$ yay -Sy pandoc-bin texlive-most
 ```
+
+```console
+$ pandoc test.md --pdf-engine=xelatex -o test.pdf
+```
+
+```console
+$ pandoc -N --variable "geometry=margin=1.2in" --variable mainfont="Palatino" --variable sansfont="Helvetica" --variable monofont="Menlo" --variable fontsize=12pt --variable version=2.0 test.md --include-in-header fancyheaders.tex --pdf-engine=xelatex --toc -o test.pdf
+```
+
+See: https://pandoc.org/demos.html
 
 ### Beets Music
 
