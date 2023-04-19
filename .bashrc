@@ -113,4 +113,42 @@ grad2() {
 
 source /usr/share/git/completion/git-prompt.sh
 
-PS1='\[\033[38;2;64;224;208m\]\u@\h:\[\033[38;2;127;255;212m\]\w\[\033[38;2;0;128;128m\]$(__git_ps1 " (%s)")\[\033[38;2;0;0;0m\]$(grad2 "64,224,208" "0,128,128" " \\$ ") '
+rgb() {
+    printf "\033[38;2;%d;%d;%dm" "$1" "$2" "$3"
+}
+
+lerp_color() {
+    local r1=$1
+    local g1=$2
+    local b1=$3
+    local r2=$4
+    local g2=$5
+    local b2=$6
+    local factor=$7
+
+    local r=$(( r1 + (r2 - r1) * factor / 100 ))
+    local g=$(( g1 + (g2 - g1) * factor / 100 ))
+    local b=$(( b1 + (b2 - b1) * factor / 100 ))
+
+    rgb $r $g $b
+}
+
+gradient() {
+    local color1=(${1//,/ })
+    local color2=(${2//,/ })
+    local text=$3
+    local length=${#text}
+    local gradient=""
+    local factor=0
+
+    for (( i=0; i<$length; i++ )); do
+        factor=$(( 100 * i / (length - 1) ))
+        gradient+=$(lerp_color "${color1[0]}" "${color1[1]}" "${color1[2]}" "${color2[0]}" "${color2[1]}" "${color2[2]}" "$factor")${text:$i:1}
+    done
+
+    gradient+="\033[0m"
+
+    echo -ne "$gradient"
+}
+
+PS1='$(gradient "64,224,208" "0,128,128" "\u@\h:\w $ ")'

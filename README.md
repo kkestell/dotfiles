@@ -41,20 +41,19 @@ Then install the following extensions:
 ## NFS Shares
 
 ```text
-nas.lan:/Archive   /home/kyle/Archive   nfs defaults,timeo=900,retrans=5,_netdev 0 0
-nas.lan:/Books     /home/kyle/Books     nfs defaults,timeo=900,retrans=5,_netdev 0 0
-nas.lan:/Documents /home/kyle/Documents nfs defaults,timeo=900,retrans=5,_netdev 0 0
-nas.lan:/Music     /home/kyle/Music     nfs defaults,timeo=900,retrans=5,_netdev 0 0
-nas.lan:/Videos    /home/kyle/Videos    nfs defaults,timeo=900,retrans=5,_netdev 0 0
-nas.lan:/Music     /home/kyle/Music     nfs defaults,timeo=900,retrans=5,_netdev 0 0
-nas.lan:/Unsorted  /home/kyle/Unsorted  nfs defaults,timeo=900,retrans=5,_netdev 0 0
-nas.lan:/Photos    /home/kyle/Pictures  nfs defaults,timeo=900,retrans=5,_netdev 0 0
-nas.lan:/Projects  /home/kyle/Projects  nfs defaults,timeo=900,retrans=5,_netdev 0 0
-nas.lan:/Roms      /home/kyle/Roms      nfs defaults,timeo=900,retrans=5,_netdev 0 0
+//NAS/Archive   /home/kyle/nas/archive   cifs _netdev,nofail,username=kyle,password=[REDACTED],workgroup=WORKGROUP,iocharset=utf8,uid=kyle,gid=kyle 0 0
+//NAS/Books     /home/kyle/nas/books     cifs _netdev,nofail,username=kyle,password=[REDACTED],workgroup=WORKGROUP,iocharset=utf8,uid=kyle,gid=kyle 0 0
+//NAS/Documents /home/kyle/nas/documents cifs _netdev,nofail,username=kyle,password=[REDACTED],workgroup=WORKGROUP,iocharset=utf8,uid=kyle,gid=kyle 0 0
+//NAS/Music     /home/kyle/nas/music     cifs _netdev,nofail,username=kyle,password=[REDACTED],workgroup=WORKGROUP,iocharset=utf8,uid=kyle,gid=kyle 0 0
+//NAS/Photos    /home/kyle/nas/photos    cifs _netdev,nofail,username=kyle,password=[REDACTED],workgroup=WORKGROUP,iocharset=utf8,uid=kyle,gid=kyle 0 0
+//NAS/Projects  /home/kyle/nas/projects  cifs _netdev,nofail,username=kyle,password=[REDACTED],workgroup=WORKGROUP,iocharset=utf8,uid=kyle,gid=kyle 0 0
+//NAS/Roms      /home/kyle/nas/roms      cifs _netdev,nofail,username=kyle,password=[REDACTED],workgroup=WORKGROUP,iocharset=utf8,uid=kyle,gid=kyle 0 0
+//NAS/Unsorted  /home/kyle/nas/unsorted  cifs _netdev,nofail,username=kyle,password=[REDACTED],workgroup=WORKGROUP,iocharset=utf8,uid=kyle,gid=kyle 0 0
+//NAS/Videos    /home/kyle/nas/videos    cifs _netdev,nofail,username=kyle,password=[REDACTED],workgroup=WORKGROUP,iocharset=utf8,uid=kyle,gid=kyle 0 0
 ```
 
 ```console
-$ mkdir -p ~/{Archive,Books,Unsorted,Projects,Roms}
+$ mkdir -p ~/nas/{archive,books,documents,music,photos,projects,roms,unsorted,videos}
 ```
 
 ```console
@@ -80,16 +79,6 @@ $ sudo systemctl start cups.socket
 ```
 
 ## Software
-
-### Flatpak
-
-```console
-$ yay flatpak
-```
-
-```console
-$ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-```
 
 ### Docker
 
@@ -139,7 +128,7 @@ See:
 ### Pandoc
 
 ```console
-$ yay -Sy pandoc-bin texlive-most
+$ yay -Sy pandoc-bin texlive-core
 ```
 
 ```console
@@ -162,18 +151,18 @@ $ mkdir -p ~/.config/beets
 `~/.config/beets/config.yaml`:
 
 ```yaml
-directory: ~/Music
-library: ~/Music/musiclibrary.db
+directory: ~/nas/music
+library: ~/nas/music/musiclibrary.db
 plugins: fetchart
 fetchart:
     auto: yes
 ```
 
 ```console
-$ beet ls
+$ beet stats
 ```
 
-### Nicotine+
+### Nicotine+ (Soulseek Client)
 
 ```console
 $ yay -Sy nicotine+
