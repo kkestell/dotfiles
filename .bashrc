@@ -85,36 +85,8 @@ _open_files_for_editing() {
 # alias pacdiff=eos-pacdiff
 ################################################################################
 
-grad2() {
-  start_color=$1
-  end_color=$2
-  str=$3
-  str_len=${#str}
-
-  IFS=',' read r1 g1 b1 <<< "$start_color"
-  IFS=',' read r2 g2 b2 <<< "$end_color"
-
-  dr=$((r2 - r1))
-  dg=$((g2 - g1))
-  db=$((b2 - b1))
-
-  rstep=$((dr / str_len))
-  gstep=$((dg / str_len))
-  bstep=$((db / str_len))
-
-  for i in $(seq 0 $((str_len - 1))); do
-    r3=$((r1 + rstep*i))
-    g3=$((g1 + gstep*i))
-    b3=$((b1 + bstep*i))
-    printf "\033[38;2;${r3};${g3};${b3}m${str:i:1}"
-  done
-  printf "\033[0m"
-}
-
-source /usr/share/git/completion/git-prompt.sh
-
 rgb() {
-    printf "\033[38;2;%d;%d;%dm" "$1" "$2" "$3"
+    printf "\001\033[38;2;%d;%d;%dm\002" "$1" "$2" "$3"
 }
 
 lerp_color() {
@@ -146,7 +118,7 @@ gradient() {
         gradient+=$(lerp_color "${color1[0]}" "${color1[1]}" "${color1[2]}" "${color2[0]}" "${color2[1]}" "${color2[2]}" "$factor")${text:$i:1}
     done
 
-    gradient+="\033[0m"
+    gradient+="\001\033[0m\002"
 
     echo -ne "$gradient"
 }

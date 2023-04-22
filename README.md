@@ -162,7 +162,7 @@ fetchart:
 $ beet stats
 ```
 
-### Nicotine+ (Soulseek Client)
+### Nicotine+
 
 ```console
 $ yay -Sy nicotine+
