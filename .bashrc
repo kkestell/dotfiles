@@ -2,25 +2,52 @@
 # ~/.bashrc
 #
 
-# If not running interactively
+# If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-# Default ls to use colors
-alias ls='ls --color=auto'
+[[ "$(whoami)" = "root" ]] && return
 
-# Show long listing of all except ".."
-alias ll='ls -lav --ignore=..'
-
-# Show long listing but no hidden dotfiles except "."
-alias l='ls -lav --ignore=.?*'
-
-# Limits recursive function depth
+# Limits recursive functions, see 'man bash'
 [[ -z "$FUNCNEST" ]] && export FUNCNEST=100
 
-# Up and down arrows to search history w/ partial completion
+## Use the up and down arrow keys for finding a command in history
+## (you can write some initial letters of the command first).
 bind '"\e[A":history-search-backward'
 bind '"\e[B":history-search-forward'
 
+#
+# Aliases
+#
+
+alias ls='ls --color=auto'
+alias ll='ls -lav --ignore=..'   # show long listing of all except ".."
+alias l='ls -lav --ignore=.?*'   # show long listing but no hidden dotfiles except "."
+
+#
+# Functions
+#
+
+# ...
+
+#
+# Function Aliases
+#
+
+# ...
+
+#
+# Environment Variables
+#
+
+export PATH=$PATH:/home/kyle/.local/bin
+export MOZ_ENABLE_WAYLAND=1
+export DOTNET_CLI_TELEMETRY_OPTOUT=1
+export DOTNET_ROOT=$HOME/.dotnet
+export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
+
+#
+# Prompt
+#
 
 rgb() {
     printf "\001\033[38;2;%d;%d;%dm\002" "$1" "$2" "$3"
@@ -61,7 +88,3 @@ gradient() {
 }
 
 PS1='$(gradient "153,193,241" "98,160,234" "\u@\h:\w $ ")'
-
-export DOTNET_CLI_TELEMETRY_OPTOUT=1
-export DOTNET_ROOT=$HOME/.dotnet
-export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools

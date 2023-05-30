@@ -163,6 +163,13 @@ tar -xzf JetBrains.Rider-2023.1.2.tar.gz -C ~/.local/bin
 
 Use `Tools` → `Create Desktop Entry` to create a desktop entry.
 
+#### LLVM 15
+
+```console 
+deb http://apt.llvm.org/buster/ llvm-toolchain-buster-15 main
+deb-src http://apt.llvm.org/buster/ llvm-toolchain-buster-15 main
+```
+
 ## Software
 
 ### Flatpak
