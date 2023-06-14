@@ -42,8 +42,6 @@ alias l='ls -lav --ignore=.?*'   # show long listing but no hidden dotfiles exce
 export PATH=$PATH:/home/kyle/.local/bin
 export MOZ_ENABLE_WAYLAND=1
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
-export DOTNET_ROOT=$HOME/.dotnet
-export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
 
 #
 # Prompt

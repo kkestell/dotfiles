@@ -1,4 +1,4 @@
-# Debian 12
+# Arch
 
 ## Mount home directory
 
@@ -8,12 +8,6 @@ Add the following to `/etc/fstab`:
 UUID=1bf423c2-d3fc-42b3-a894-05057b929b76 /home/kyle ext4 defaults 0 0
 ```
 
-Reload systemd:
-
-```console
-sudo systemctl daemon-reload
-```
-
 Reboot:
 
 ```console
@@ -21,12 +15,6 @@ sudo reboot
 ```
 
 ## Network Shares
-
-Install `cifs-utils`:
-
-```console
-sudo apt install cifs-utils
-```
 
 Add the following to `/etc/fstab`:
 
@@ -60,42 +48,12 @@ Mount:
 sudo mount -a
 ```
 
-## Fix Gnome Shell
-
-### Disable Tracker
-
-```console
-systemctl --user mask tracker-extract-3.service tracker-miner-fs-3.service tracker-miner-rss-3.service tracker-writeback-3.service tracker-xdg-portal-3.service tracker-miner-fs-control-3.service
-```
-
-```console
-tracker3 reset -s -r
-```
-
-```console
-sudo reboot
-```
-
-### Improve GTK4 font rendering
-
-Add the following to `~/.config/gtk-4.0/settings.ini`:
-
-```ini
-[Settings]
-gtk-hint-font-metrics=1
-```
-
-### Shell Extensions
-
-* https://extensions.gnome.org/extension/2182/noannoyance/
-* https://extensions.gnome.org/extension/4269/alphabetical-app-grid/
-
 ## Printing
 
 Brother HL-L2340D
 
 ```console
-sudo apt install cups cups-pdf printer-driver-brlaser
+yay -Sy cups cups-pdf brlaser
 ```
 
 ```console
@@ -112,23 +70,27 @@ See: [https://github.com/kkestell/backup](https://github.com/kkestell/backup)
 
 ### General
 
-```console
-sudo apt install build-essential clang
-```
-
-### Git
-
-Install `git`:
-
-```console
-sudo apt install git
-```
-
 Configure username and email:
 
 ```console
 git config --global user.name "[REDACTED]"
 git config --global user.email "[REDACTED]"
+```
+
+### Docker
+
+```console
+yay -Sy docker docker-compose
+```
+
+```console
+sudo systemctl enable docker
+sudo systemctl start docker
+```
+
+```console
+sudo usermod -aG docker $(whoami)
+sudo reboot
 ```
 
 ### .NET
@@ -166,8 +128,7 @@ Use `Tools` → `Create Desktop Entry` to create a desktop entry.
 #### LLVM 15
 
 ```console 
-deb http://apt.llvm.org/buster/ llvm-toolchain-buster-15 main
-deb-src http://apt.llvm.org/buster/ llvm-toolchain-buster-15 main
+sudo pacman -Sy llvm
 ```
 
 ## Software
@@ -175,8 +136,7 @@ deb-src http://apt.llvm.org/buster/ llvm-toolchain-buster-15 main
 ### Flatpak
 
 ```console
-sudo apt install flatpak
-sudo apt install gnome-software-plugin-flatpak
+sudo pacman -Sy flatpak
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 ```
 
@@ -192,48 +152,10 @@ flatpak install flathub io.bassi.Amberol
 flatpak install flathub com.calibre_ebook.calibre
 ```
 
-### Docker
-
-See: https://docs.docker.com/engine/install/debian/#install-using-the-repository
-
-```console
-sudo usermod -aG docker $(whoami)
-sudo reboot
-```
-
-### Virtual Machines
-
-```console
-yay -Sy virt-manager qemu-desktop libvirt edk2-ovmf dnsmasq iptables-nft
-```
-
-```console
-sudo systemctl enable libvirtd.service
-sudo systemctl start libvirtd.service
-```
-
-```console
-sudo usermod -aG libvirt $(whoami)
-```
-
-```console
-sudo virsh net-start default
-```
-
-```console
-sudo reboot
-```
-
-See:
-
-* https://wiki.archlinux.org/title/libvirt
-* https://wiki.archlinux.org/title/KVM
-* https://wiki.archlinux.org/title/QEMU
-
 ### Pandoc
 
 ```console
-sudo apt install pandoc texlive-full
+yay -Sy pandoc-bin texlive-core
 ```
 
 ```console
@@ -270,13 +192,13 @@ beet stats
 ### Nicotine+
 
 ```console
-yay -Sy nicotine+
+sudo pacman -Sy nicotine+
 ```
 
 ### Fonts
 
 ```console
-sudo apt install fonts-firacode
+sudo pacman -Sy ttf-fira-code
 ```
 
 ### GitHub Desktop
@@ -292,9 +214,8 @@ sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/shiftkey-package
 ```
 
 ```console
-sudo apt update && sudo apt install github-desktop
+yay -Sy github-desktop-bin
 ```
-
 
 ### Visual Studio Code
 
