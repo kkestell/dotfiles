@@ -93,24 +93,10 @@ sudo usermod -aG docker $(whoami)
 sudo reboot
 ```
 
-### .NET
+### .NET 7
 
 ```console
-cd ~/Downloads
-wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh
-```
-
-```console
-sudo chmod +x ./dotnet-install.sh
-```
-
-```console
-./dotnet-install.sh --channel 7.0
-```
-
-```console
-echo 'export DOTNET_ROOT=$HOME/.dotnet' >> ~/.bashrc
-echo 'export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools' >> ~/.bashrc
+sudo pacman -Sy dotnet-sdk
 ```
 
 #### Rider
