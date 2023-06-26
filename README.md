@@ -48,6 +48,12 @@ Mount:
 sudo mount -a
 ```
 
+## Wayland Support
+
+```
+sudo pacman -Sy plasma-wayland-session
+```
+
 ## Printing
 
 Brother HL-L2340D
@@ -189,16 +195,6 @@ sudo pacman -Sy ttf-fira-code
 
 ### GitHub Desktop
 
-See: https://github.com/shiftkey/desktop
-
-```console
-wget -qO - https://apt.packages.shiftkey.dev/gpg.key | gpg --dearmor | sudo tee /usr/share/keyrings/shiftkey-packages.gpg > /dev/null
-```
-
-```console
-sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/shiftkey-packages.gpg] https://apt.packages.shiftkey.dev/ubuntu/ any main" > /etc/apt/sources.list.d/shiftkey-packages.list'
-```
-
 ```console
 yay -Sy github-desktop-bin
 ```
@@ -206,7 +202,7 @@ yay -Sy github-desktop-bin
 ### Visual Studio Code
 
 ```console
-yay visual-studio-code-bin
+yay -Sy visual-studio-code-bin
 ```
 
 ### Menu Editor
@@ -225,4 +221,19 @@ flatpak install flathub org.telegram.desktop
 
 ```console
 flatpak install flathub com.vixalien.sticky
+```
+
+### Express VPN
+
+```console
+yay -Sy expressvpn
+```
+
+```console
+sudo systemctl enable expressvpn
+sudo systemctl start expressvpn
+```
+
+```console
+expressvpn activate
 ```
