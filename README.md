@@ -48,12 +48,6 @@ Mount:
 sudo mount -a
 ```
 
-## Wayland Support
-
-```
-sudo pacman -Sy plasma-wayland-session
-```
-
 ## Printing
 
 Brother HL-L2340D
@@ -76,7 +70,7 @@ See: [https://github.com/kkestell/backup](https://github.com/kkestell/backup)
 
 ### General
 
-Configure username and email:
+Configure `git` username and email:
 
 ```console
 git config --global user.name "[REDACTED]"
@@ -99,11 +93,31 @@ sudo usermod -aG docker $(whoami)
 sudo reboot
 ```
 
-### .NET 7
+### .NET 8
 
 ```console
-sudo pacman -Sy dotnet-sdk
+./dotnet-install.sh --channel 8.0.1xx --quality preview
 ```
+
+### LLVM 15
+
+```console 
+sudo pacman -Sy llvm
+```
+
+### JetBrains IDEs
+
+#### CLion
+
+Download tarball from [https://www.jetbrains.com/clion/download/](https://www.jetbrains.com/clion/download/).
+
+Extract to `~/.local/bin`.
+
+```console
+tar -xzf CLion-2023.1.4.tar.gz -C ~/.local/bin
+```
+
+Use `Tools` → `Create Desktop Entry` to create a desktop entry.
 
 #### Rider
 
@@ -117,10 +131,12 @@ tar -xzf JetBrains.Rider-2023.1.2.tar.gz -C ~/.local/bin
 
 Use `Tools` → `Create Desktop Entry` to create a desktop entry.
 
-#### LLVM 15
+## Misc.
 
-```console 
-sudo pacman -Sy llvm
+### Fonts
+
+```console
+sudo pacman -Sy ttf-fira-code cantarell-fonts
 ```
 
 ## Software
@@ -144,10 +160,16 @@ flatpak install flathub io.bassi.Amberol
 flatpak install flathub com.calibre_ebook.calibre
 ```
 
+#### Telegram
+
+```console
+flatpak install flathub org.telegram.desktop
+```
+
 ### Pandoc
 
 ```console
-yay -Sy pandoc-bin texlive-core
+yay -Sy pandoc-bin texlive-core texlive-xetex
 ```
 
 ```console
@@ -157,40 +179,10 @@ pandoc test.md --pdf-engine=xelatex --variable "geometry=margin=0.75in" --highli
 
 See: https://pandoc.org/demos.html
 
-### Beets Music
-
-```console
-yay -Sy python-requests beets
-```
-
-```console
-mkdir -p ~/.config/beets
-```
-
-`~/.config/beets/config.yaml`:
-
-```yaml
-directory: ~/nas/music
-library: ~/nas/music/musiclibrary.db
-plugins: fetchart
-fetchart:
-    auto: yes
-```
-
-```console
-beet stats
-```
-
 ### Nicotine+
 
 ```console
 sudo pacman -Sy nicotine+
-```
-
-### Fonts
-
-```console
-sudo pacman -Sy ttf-fira-code
 ```
 
 ### GitHub Desktop
@@ -209,12 +201,6 @@ yay -Sy visual-studio-code-bin
 
 ```console
 yay menulibre
-```
-
-### Telegram
-
-```console
-flatpak install flathub org.telegram.desktop
 ```
 
 ### Sticky Notes
