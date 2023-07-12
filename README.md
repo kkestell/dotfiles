@@ -48,6 +48,42 @@ Mount:
 sudo mount -a
 ```
 
+## Fix Gnome Shell
+
+### Disable Tracker
+
+```console
+systemctl --user mask tracker-extract-3.service tracker-miner-fs-3.service tracker-miner-rss-3.service tracker-writeback-3.service tracker-xdg-portal-3.service tracker-miner-fs-control-3.service
+```
+
+```console
+tracker3 reset -s -r
+```
+
+```console
+sudo reboot
+```
+
+### Improve GTK4 font rendering
+
+Add the following to `~/.config/gtk-4.0/settings.ini`:
+
+```ini
+[Settings]
+gtk-hint-font-metrics=1
+```
+
+### Shell Extensions
+
+* https://extensions.gnome.org/extension/5410/grand-theft-focus/
+* https://extensions.gnome.org/extension/4269/alphabetical-app-grid/
+
+### Disable Animations
+
+```console
+gsettings set org.gnome.desktop.interface enable-animations false
+```
+
 ## Printing
 
 Brother HL-L2340D
@@ -93,6 +129,12 @@ sudo usermod -aG docker $(whoami)
 sudo reboot
 ```
 
+### .NET 7
+
+```console
+sudo pacman -Sy dotnet-sdk
+```
+
 ### .NET 8
 
 ```console
@@ -103,6 +145,12 @@ sudo reboot
 
 ```console 
 sudo pacman -Sy llvm
+```
+
+### Valgrind
+
+```console
+sudo pacman -Sy valgrind
 ```
 
 ### JetBrains IDEs
@@ -131,12 +179,18 @@ tar -xzf JetBrains.Rider-2023.1.2.tar.gz -C ~/.local/bin
 
 Use `Tools` → `Create Desktop Entry` to create a desktop entry.
 
+#### PyCharm
+
+```console
+sudo pacman -Sy pycharm-community-edition
+```
+
 ## Misc.
 
 ### Fonts
 
 ```console
-sudo pacman -Sy ttf-fira-code cantarell-fonts
+sudo pacman -Sy ttf-fira-code
 ```
 
 ## Software
