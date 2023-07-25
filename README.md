@@ -75,6 +75,10 @@ gtk-hint-font-metrics=1
 
 ### Shell Extensions
 
+```console
+sudo pacman -Sy gnome-browser-connector
+```
+
 * https://extensions.gnome.org/extension/5410/grand-theft-focus/
 * https://extensions.gnome.org/extension/4269/alphabetical-app-grid/
 
@@ -190,7 +194,7 @@ sudo pacman -Sy pycharm-community-edition
 ### Fonts
 
 ```console
-sudo pacman -Sy ttf-fira-code
+sudo pacman -Sy ttf-fira-code ttf-ibm-plex
 ```
 
 ## Software
@@ -276,4 +280,10 @@ sudo systemctl start expressvpn
 
 ```console
 expressvpn activate
+```
+
+### OBS Studio
+
+```console
+sudo pacman -Sy obs-studio qt6-wayland
 ```
