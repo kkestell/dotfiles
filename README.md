@@ -73,12 +73,6 @@ Add the following to `~/.config/gtk-4.0/settings.ini`:
 gtk-hint-font-metrics=1
 ```
 
-### Shell Extensions
-
-```console
-sudo pacman -Sy gnome-browser-connector
-```
-
 * https://extensions.gnome.org/extension/5410/grand-theft-focus/
 * https://extensions.gnome.org/extension/4269/alphabetical-app-grid/
 
@@ -86,6 +80,21 @@ sudo pacman -Sy gnome-browser-connector
 
 ```console
 gsettings set org.gnome.desktop.interface enable-animations false
+```
+
+### Solid Color Desktop Background
+
+```console
+gsettings set org.gnome.desktop.background picture-uri ''
+gsettings set org.gnome.desktop.background picture-uri-dark ''
+gsettings reset org.gnome.desktop.background color-shading-type
+gsettings set org.gnome.desktop.background primary-color '#000000'
+```
+
+### Shell Extensions
+
+```console
+sudo pacman -Sy gnome-browser-connector
 ```
 
 ## Printing
