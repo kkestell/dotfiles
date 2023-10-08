@@ -48,6 +48,21 @@ Mount:
 sudo mount -a
 ```
 
+## Nvidia
+
+See: [https://wiki.archlinux.org/title/NVIDIA](https://wiki.archlinux.org/title/NVIDIA)
+
+```console
+sudo systemctl enable nvidia-suspend.service
+sudo systemctl enable nvidia-resume.service
+```
+
+Add the following to `/etc/modprobe.d/nvidia-power-management.conf`
+
+```text
+options nvidia NVreg_PreserveVideoMemoryAllocations=1 NVreg_TemporaryFilePath=/var/tmp
+```
+
 ## Fix Gnome Shell
 
 ### Disable Tracker
@@ -55,6 +70,8 @@ sudo mount -a
 ```console
 systemctl --user mask tracker-extract-3.service tracker-miner-fs-3.service tracker-miner-rss-3.service tracker-writeback-3.service tracker-xdg-portal-3.service tracker-miner-fs-control-3.service
 ```
+
+FIXME: The following command no longer works.
 
 ```console
 tracker3 reset -s -r
@@ -72,9 +89,6 @@ Add the following to `~/.config/gtk-4.0/settings.ini`:
 [Settings]
 gtk-hint-font-metrics=1
 ```
-
-* https://extensions.gnome.org/extension/5410/grand-theft-focus/
-* https://extensions.gnome.org/extension/4269/alphabetical-app-grid/
 
 ### Disable Animations
 
@@ -96,6 +110,9 @@ gsettings set org.gnome.desktop.background primary-color '#000000'
 ```console
 sudo pacman -Sy gnome-browser-connector
 ```
+
+* https://extensions.gnome.org/extension/5410/grand-theft-focus/
+* https://extensions.gnome.org/extension/4269/alphabetical-app-grid/
 
 ## Printing
 
@@ -213,12 +230,6 @@ sudo pacman -Sy ttf-fira-code ttf-ibm-plex
 ```console
 sudo pacman -Sy flatpak
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-```
-
-#### Amberol
-
-```console
-flatpak install flathub io.bassi.Amberol
 ```
 
 #### Calibre
