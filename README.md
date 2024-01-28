@@ -22,6 +22,7 @@ Add the following to `/etc/fstab`:
 //NAS/Archive   /home/kyle/nas/archive   cifs _netdev,nofail,username=kyle,password=[REDACTED],workgroup=WORKGROUP,iocharset=utf8,uid=kyle,gid=kyle 0 0
 //NAS/Books     /home/kyle/nas/books     cifs _netdev,nofail,username=kyle,password=[REDACTED],workgroup=WORKGROUP,iocharset=utf8,uid=kyle,gid=kyle 0 0
 //NAS/Documents /home/kyle/nas/documents cifs _netdev,nofail,username=kyle,password=[REDACTED],workgroup=WORKGROUP,iocharset=utf8,uid=kyle,gid=kyle 0 0
+//NAS/Kyle      /home/kyle/nas/kyle      cifs _netdev,nofail,username=kyle,password=[REDACTED],workgroup=WORKGROUP,iocharset=utf8,uid=kyle,gid=kyle 0 0
 //NAS/Music     /home/kyle/nas/music     cifs _netdev,nofail,username=kyle,password=[REDACTED],workgroup=WORKGROUP,iocharset=utf8,uid=kyle,gid=kyle 0 0
 //NAS/Photos    /home/kyle/nas/photos    cifs _netdev,nofail,username=kyle,password=[REDACTED],workgroup=WORKGROUP,iocharset=utf8,uid=kyle,gid=kyle 0 0
 //NAS/Projects  /home/kyle/nas/projects  cifs _netdev,nofail,username=kyle,password=[REDACTED],workgroup=WORKGROUP,iocharset=utf8,uid=kyle,gid=kyle 0 0
@@ -33,7 +34,7 @@ Add the following to `/etc/fstab`:
 Create mount points:
 
 ```console
-mkdir -p ~/nas/{archive,books,documents,music,photos,projects,roms,unsorted,videos}
+mkdir -p ~/nas/{archive,books,documents,kyle,music,photos,projects,roms,unsorted,videos}
 ```
 
 Reload systemd:
@@ -48,40 +49,7 @@ Mount:
 sudo mount -a
 ```
 
-## Nvidia
-
-See: [https://wiki.archlinux.org/title/NVIDIA](https://wiki.archlinux.org/title/NVIDIA)
-
-```console
-sudo systemctl enable nvidia-suspend.service
-sudo systemctl enable nvidia-resume.service
-```
-
-Add the following to `/etc/modprobe.d/nvidia-power-management.conf`
-
-```text
-options nvidia NVreg_PreserveVideoMemoryAllocations=1 NVreg_TemporaryFilePath=/var/tmp
-```
-
-## Fix Gnome Shell
-
-### Disable Tracker
-
-```console
-systemctl --user mask tracker-extract-3.service tracker-miner-fs-3.service tracker-miner-rss-3.service tracker-writeback-3.service tracker-xdg-portal-3.service tracker-miner-fs-control-3.service
-```
-
-FIXME: The following command no longer works.
-
-```console
-tracker3 reset -s -r
-```
-
-```console
-sudo reboot
-```
-
-### Improve GTK4 font rendering
+### Improve GTK4 Font Rendering
 
 Add the following to `~/.config/gtk-4.0/settings.ini`:
 
@@ -159,19 +127,13 @@ sudo usermod -aG docker $(whoami)
 sudo reboot
 ```
 
-### .NET 7
+### .NET SDK
 
 ```console
 sudo pacman -Sy dotnet-sdk
 ```
 
-### .NET 8
-
-```console
-./dotnet-install.sh --channel 8.0.1xx --quality preview
-```
-
-### LLVM 15
+### LLVM
 
 ```console 
 sudo pacman -Sy llvm
@@ -247,7 +209,7 @@ flatpak install flathub org.telegram.desktop
 ### Pandoc
 
 ```console
-yay -Sy pandoc-bin texlive-core texlive-xetex
+yay -Sy pandoc-bin texlive
 ```
 
 ```console
